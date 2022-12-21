@@ -27,15 +27,41 @@ class Game:
         return randint(0,2)
 
 
+    def make_move(self):
+        print('''
+        Choose signal:
+        1. Rock
+        2. Paper
+        3. Scissors
+        ''')
+        signal = input()
+        match signal.lower():
+            case "rock":
+                return 0
+            case "1":
+                return 0
+            case "paper":
+                return 1
+            case "2":
+                return 1   
+            case "scissors":
+                return 2
+            case "3":
+                return 2
+            case _:
+                self.make_move()
+        return signal
+
+
     def match(self):
-        player1_figure = self.draw()
+        player1_figure = self.make_move()
         print(f"Player {self.player1.get_name()} show {self.figures[player1_figure]}")
         player2_figure = self.draw()
         print(f"Player {self.player2.get_name()} show {self.figures[player2_figure]}")
         if (player1_figure > player2_figure):
             self.increase_score(self.player1)
         elif (player1_figure == player2_figure):
-            print("Draw!")
+            print("Tie!")
         else: 
             self.increase_score(self.player2)
 
@@ -69,7 +95,7 @@ class Game:
 
     def handle_round(self, counter):
         self.create_players()
-        sleep(2.5)
+        sleep(1.5)
         self.round_start_message(counter)
         self.match()
 
